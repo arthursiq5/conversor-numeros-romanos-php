@@ -13,14 +13,15 @@ class Roman
         if ($number == '') return false;
         $invalidPattern = '/IL|IC|ID|IM|VX|IIX|VL|VC|VD|VM|LC|LD|LM|DM|IIII|VV|LL|DD/i';
         if (preg_match($invalidPattern, $number) === 1) return false;
-        $pattern = implode("|", self::romansAlgarism);
-        $remaining = preg_replace("/($pattern)/i","", $number);
-        return $remaining === '';
+        $validPattern = '/^[MDCLXVI]+$/i';
+        return preg_match($validPattern, $number) === 1;
     }
 
     public static function toDecimal(string $romanNumber): int {
         $number = 0;
-        if (!self::isValidRomanNumber($romanNumber)) return $number;
+        if (!self::isValidRomanNumber($romanNumber)) {
+            throw new \InvalidArgumentException("O número romano fornecido é inválido.");
+        };
         foreach (self::romansAlgarism as $key => $character) {
             while (strpos($romanNumber, $character) === 0) {
                 $number += self::arabicsAlgarism[$key];
