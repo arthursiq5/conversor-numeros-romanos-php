@@ -11,6 +11,8 @@ class Roman
     public static function isValidRomanNumber(string $number): bool
     {
         if ($number == '') return false;
+        $invalidPattern = '/IL|IC|ID|IM|VX|IIX|VL|VC|VD|VM|LC|LD|LM|DM|IIII|VV|LL|DD/i';
+        if (preg_match($invalidPattern, $number) === 1) return false;
         $pattern = implode("|", self::romansAlgarism);
         $remaining = preg_replace("/($pattern)/i","", $number);
         return $remaining === '';

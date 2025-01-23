@@ -13,6 +13,10 @@ class RomanToDecimalTest extends TestCase
         $this->assertTrue(Roman::isValidRomanNumber('X'));
         $this->assertTrue(Roman::isValidRomanNumber('C'));
         $this->assertFalse(Roman::isValidRomanNumber('ABC'));
+        $this->assertFalse(Roman::isValidRomanNumber('VV'));
+        $this->assertFalse(Roman::isValidRomanNumber('XIIII'));
+        $this->assertFalse(Roman::isValidRomanNumber('VX'));
+        $this->assertFalse(Roman::isValidRomanNumber('VIIX'));
     }
     public function test_basic_conversion_to_decimal(): void
     {
