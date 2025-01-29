@@ -7,6 +7,12 @@ use App\Validators\RomanNumberValidator;
 
 class RomanToIntegerStrategy implements ConversionStrategyInterface
 {
+    private function normalizeInput(string $input): string
+    {
+        $input = strtoupper($input);
+        return str_replace(' ', '', $input);
+    }
+
     /**
      * convert a number to other format
      * @var string
@@ -15,6 +21,7 @@ class RomanToIntegerStrategy implements ConversionStrategyInterface
     public function convert($romanNumber)
     {
         $number = 0;
+        $romanNumber = $this->normalizeInput($romanNumber);
         if (!(new RomanNumberValidator($romanNumber))->isValid()) {
             throw new \InvalidArgumentException("O número romano fornecido é inválido.");
         };

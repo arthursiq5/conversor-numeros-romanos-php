@@ -3,8 +3,6 @@
 namespace App\Test;
 
 use App\ConversionStrategies\RomanToIntegerStrategy;
-use App\Roman;
-use App\Validators\RomanNumberValidator;
 use PHPUnit\Framework\TestCase;
 
 class RomanToDecimalTest extends TestCase
@@ -32,6 +30,13 @@ class RomanToDecimalTest extends TestCase
         $this->assertEquals(43, $this->converter->convert('XLIII'));
         $this->assertEquals(19, $this->converter->convert('XIX'));
         $this->assertEquals(79, $this->converter->convert('LXXIX'));
+    }
+
+    public function test_unormalized_roman_number(): void
+    {
+        $this->assertEquals(4, $this->converter->convert('iv'));
+        $this->assertEquals(19, $this->converter->convert(' xi x'));
+        $this->assertEquals(43, $this->converter->convert(' X l IiI '));
     }
 
     public function test_invalid_conversion_to_decimal(): void
