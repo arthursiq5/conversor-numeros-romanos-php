@@ -8,7 +8,7 @@ class RomanConverterContext
 {
     private ConversionStrategyInterface $strategy;
 
-    public function __construct(ConversionStrategyInterface $strategy = null)
+    public function __construct(?ConversionStrategyInterface $strategy = null)
     {
         $this->strategy = $strategy;
     }
